@@ -5,21 +5,28 @@ import org.scalatest.{FunSpec, ShouldMatchers}
 
 class SemanticForestSpec extends FunSpec with ShouldMatchers {
 
-  describe("a parsable sentence with a single point of ambiguity") {
+  describe("a parse forest") {
 
-    val parseResult: ParseResult = XbarGrammar.parse("NN")("NP")
+    it ("should be able to generate all available trees as a stream") {}
 
-    it ("") {
-      parseResult.isParseSuccess should be (true)
+    it ("should be able to generate all available subtrees as a stream") {}
+    
+    it ("should be prune-able by score") {}
 
-      // It's either "meat sauce" or "meat <and> sauce"
-      parseResult.asParseSuccess.getStatistics.getCountAmbiguousNodes should be (1)
-    }
+    it ("should be prune-able by pattern") {}
   }
 
-  describe ("a semantic parse forest, given a syntactic one") {
-    it ("should have concept nodes as terminals") {
+  describe ("a parse pattern") {
 
+    it ("should match all nodes for which it is more general") {
+      // "UP(U_(U(x)), *)" or something equivalent should match all coordinating phrase options,
+      // like "and Susan" or "but not Jason"
+      // The idea here would be to predefine certain phrase types, like genitives, appositives, etc, for
+      // the purpose of affecting the scoring given context.
+    }
+
+    it ("should be able to specify both syntactic and semantic elements")  {
+      // "in the building" should be distinguishable from "in the night", as location vs. time
     }
   }
 }

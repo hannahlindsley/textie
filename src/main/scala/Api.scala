@@ -11,7 +11,7 @@ object Api {
 
   private def run(tagger: Tagger)
                  (parser: Parser)
-                 (conceptualizer: Conceptualizer):  (String => String => Action[SemanticForest]) =
+                 (conceptualizer: Conceptualizer):  (String => String => Result[SemanticForest]) =
     (s: String) => (ph: String) => tagger(s) >>= parser(ph) >>= conceptualizer
 
   def iguanaParser: Parser = (upToPhrase: String) => {
@@ -39,6 +39,6 @@ object Api {
 
   def basicTagger: Tagger = ???
   
-  def processAsNounPhrase(text: String): Action[SemanticForest] =
+  def processAsNounPhrase(text: String): Result[SemanticForest] =
     run(basicTagger)(iguanaParser)(basicConceptualizer)(text)("NP")  
 }
